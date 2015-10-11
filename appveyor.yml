@@ -28,11 +28,11 @@ install:
   - cmake -DBUILD_SHARED_LIBS=ON ..
   - cmake --build . --config Release
   - cmake --build . --config Debug
-  - dir
+  - dir Debug
   - cd ../..
   - set GTEST_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Release\gtest.lib
-  - set GTESTD_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Debug\gtestd.lib
-       
+  - set GTESTD_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Debug\gtest.lib
+
 build_script:
   - cmake . -B"build" -G"Visual Studio 14" -Wno-dev -DBOOST_ROOT:STRING="%BOOST_ROOT%" -DGTEST_ROOT:STRING="%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0"
   - cmake --build "build" --config %CONFIG%
