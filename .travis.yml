@@ -1,0 +1,34 @@
+language: cpp
+
+addons:
+  apt:
+    packages:
+    - cmake
+
+compiler:
+  - gcc
+  
+before_script:
+  - cd time_from_uuid
+  - wget -c 'http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.bz2/download'
+  - tar xf download
+  - rm download
+  - echo '-----boost downloaded & extracted-----'
+  - export PATH=$PATH:$PWD/boost_1_59_1/
+  - echo $PATH
+  - export GTEST_BUILD_NAME=gtest-1.7.0
+  - wget 'http://googletest.googlecode.com/files/'$GTEST_BUILD_NAME'.zip'
+  - unzip $GTEST_BUILD_NAME.zip
+  - rm $GTEST_BUILD_NAME.zip
+  - cd $GTEST_BUILD_NAME/cmake
+  - cmake -DBUILD_SHARED_LIBS=ON -Dgtest_build_samples=ON -G"Unix Makefiles" ..
+  - make
+  - cd ../../
+  - echo '-----gtest compiled-----'
+  - cmake . -B"build" -Wno-dev
+script:
+  - cd build
+  - make
+  - cd ../bin
+  - ./uuidTest
+ 

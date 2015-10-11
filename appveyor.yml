@@ -1,0 +1,42 @@
+environment:
+  matrix:
+     - GENERATOR: "Visual Studio 14"
+       CONFIG: Debug
+       
+matrix:
+  fast_finish: true
+
+environment:
+  BOOST_ROOT: C:\Libraries\boost_1_59_0
+  BOOST_LIBRARYDIR: C:\Libraries\boost_1_59_0\lib32-msvc-14.0
+  BOOST_LIBRARYDIR64: C:\Libraries\boost_1_59_0\lib64-msvc-14.0
+  BUILD_EXAMPLES: OFF  # don't build examples to not exceed allowed build time (40 min)     
+  
+#----------------------------------------------------------------------------------------  
+# lets go	
+init:
+  - cmd: cmake --version
+  - cmd: msbuild /version
+  - cmd: dir C:\Libraries
+  
+  
+install:
+  - ps: Start-FileDownload https://googletest.googlecode.com/files/gtest-1.7.0.zip
+  - 7z x gtest-1.7.0.zip > NUL
+  - cd gtest-1.7.0
+  - md build
+  - cd build
+  - cmake -DBUILD_SHARED_LIBS=ON ..
+  - cmake --build . --config %CONFIG%
+  - dir
+  - cd ..
+  - dir
+  - cd ..
+  - dir
+       
+build_script:
+  - cmake . -B"build" -G"Visual Studio 14" -Wno-dev -DBOOST_ROOT:STRING="%BOOST_ROOT%" -DGTEST_ROOT:STRING="%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0"
+  - cmake --build "build" --config %CONFIG%
+  
+ test_script:
+  - \build\%CONFIG%\uuidTest.exe
