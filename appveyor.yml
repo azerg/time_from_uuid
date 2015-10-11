@@ -15,8 +15,9 @@ matrix:
 #----------------------------------------------------------------------------------------  
 # lets go	
 init:
-  - cmd: cmake --version
-  - cmd: msbuild /version  
+  - cmake --version
+  - msbuild /version
+  - echo %CONFIGURATION%
   
 install:
   - ps: Start-FileDownload https://googletest.googlecode.com/files/gtest-1.7.0.zip
@@ -25,12 +26,10 @@ install:
   - md build
   - cd build
   - cmake -DBUILD_SHARED_LIBS=ON ..
-  - cmake --build . --config %CONFIG%
+  - cmake --build . --config Release
+  - cmake --build . --config Debug
   - dir
-  - cd ..
-  - dir
-  - cd ..
-  - dir
+  - cd ../..
   - set GTEST_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Release\gtest.lib
   - set GTESTD_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Debug\gtestd.lib
        

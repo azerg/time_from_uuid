@@ -26,7 +26,7 @@ before_script:
   - cd ../../
   - echo '-----gtest compiled-----'
   - export GTEST_ROOT=$PWD/gtest-1.7.0/
-  - cmake . -B"build" -Wno-dev
+  - cmake . -B"build" -Wno-dev -DGTEST_ROOT=$GTEST_ROOT -DBOOST_ROOT=$BOOST_ROOT
 script:
   - cd build
   - make
