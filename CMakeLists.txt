@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 # debug output
 message ("GTEST_ROOT: " ${GTEST_ROOT})
+message ("ENV {GTEST_LIBRARY}: " $ENV{GTEST_LIBRARY})
+message ("ENV {GTESTD_LIBRARY}: " $ENV{GTESTD_LIBRARY})
 message ("BOOST_ROOT: " ${BOOST_ROOT})
 
 set (test_executable_name uuidTest)
@@ -40,6 +42,10 @@ if (WIN32)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRT")
 	endif()
 else()
+  if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
+  endif()
+
 	message ("---linking linux gtest libs")
 	target_link_libraries (${test_executable_name} ${GTEST_ROOT}/cmake/libgtest.so)
 	target_link_libraries (${test_executable_name} ${URIPARSER_FOLDER}/deploy/lib/liburiparser.so)
