@@ -38,4 +38,4 @@ build_script:
   - cmake --build "build" --config %CONFIG%
   
 test_script:
-  - \build\%CONFIG%\uuidTest.exe
+  - C:\projects\time-from-uuid\build\%CONFIG%\uuidTest.exe
