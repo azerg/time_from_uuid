@@ -38,5 +38,5 @@ build_script:
   - cmake . -B"build" -G"Visual Studio 14" -Wno-dev -DBOOST_ROOT:STRING="%BOOST_ROOT%" -DGTEST_ROOT:STRING="%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0"
   - cmake --build "build" --config %CONFIG%
   
- test_script:
+test_script:
   - \build\%CONFIG%\uuidTest.exe
