@@ -12,15 +12,12 @@ add_executable(${test_executable_name} testMain.cpp uuidTest.cpp uuid_to_time.hp
 
 include_directories ("${PROJECT_SOURCE_DIR}" "${GTEST_ROOT}/include" "${BOOST_ROOT}")
 
-#-DGTEST_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Release\gtest.lib
-#-DGTEST_MAIN_LIBRARY=%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0\build\Release\gtest_main.lib
-
 if (WIN32)
   message ("---linking windows libs")
   if (DEFINED ENV{APPVEYOR})
     message ("---on appveoyr build machine")
-    target_link_libraries (${test_executable_name} optimized ENV{GTEST_LIBRARY})
-    target_link_libraries (${test_executable_name} debug ENV{GTESTD_LIBRARY})
+    target_link_libraries (${test_executable_name} optimized $ENV{GTEST_LIBRARY})
+    target_link_libraries (${test_executable_name} debug $ENV{GTESTD_LIBRARY})
   else()
     message ("---on local PC")
     target_link_libraries (${test_executable_name} optimized ${GTEST_ROOT}/msvc/gtest/Release/gtest.lib)

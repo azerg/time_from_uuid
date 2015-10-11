@@ -16,9 +16,7 @@ matrix:
 # lets go	
 init:
   - cmd: cmake --version
-  - cmd: msbuild /version
-  - cmd: dir C:\Libraries
-  
+  - cmd: msbuild /version  
   
 install:
   - ps: Start-FileDownload https://googletest.googlecode.com/files/gtest-1.7.0.zip
