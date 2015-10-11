@@ -9,6 +9,7 @@ compiler:
   - gcc
   
 before_script:
+  - dir
   - cd time_from_uuid
   - wget -c 'http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.bz2/download'
   - tar xf download

@@ -1,16 +1,16 @@
 environment:
+  BOOST_ROOT: C:\Libraries\boost_1_59_0
+  BOOST_LIBRARYDIR: C:\Libraries\boost_1_59_0\lib32-msvc-14.0
+  BOOST_LIBRARYDIR64: C:\Libraries\boost_1_59_0\lib64-msvc-14.0
+  BUILD_EXAMPLES: OFF  # don't build examples to not exceed allowed build time (40 min) 
+  
   matrix:
      - GENERATOR: "Visual Studio 14"
        CONFIG: Debug
        
 matrix:
   fast_finish: true
-
-environment:
-  BOOST_ROOT: C:\Libraries\boost_1_59_0
-  BOOST_LIBRARYDIR: C:\Libraries\boost_1_59_0\lib32-msvc-14.0
-  BOOST_LIBRARYDIR64: C:\Libraries\boost_1_59_0\lib64-msvc-14.0
-  BUILD_EXAMPLES: OFF  # don't build examples to not exceed allowed build time (40 min)     
+    
   
 #----------------------------------------------------------------------------------------  
 # lets go	
