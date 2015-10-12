@@ -7,14 +7,14 @@
 #define RATE_DIFF 10000000 /* 100 nsecs */
 
 /* Convert a Windows filetime_t into a UNIX time_t */
-time_t fileTimeToUnixTime(uint64_t ftime) {
+time_t fileTimeToUnixTime(uint64_t ftime){
   int64_t tconv = (ftime - EPOCH_DIFF) / RATE_DIFF;
   return (time_t)tconv;
 }
 
 TEST(uuidToTime, iexploreUuidTest){
   boost::uuids::string_generator strGen;
-  boost::uuids::uuid uuid{strGen("{12486CD4-5890-11E5-9BC7-20689DBFB469}")};
+  boost::uuids::uuid uuid = strGen("{12486CD4-5890-11E5-9BC7-20689DBFB469}");
 
   auto convertedTime = ExtractTimeFromUUID(uuid);
 
@@ -27,4 +27,14 @@ TEST(uuidToTime, iexploreUuidTest){
   EXPECT_EQ(14, ptm->tm_hour);
   EXPECT_EQ(19, ptm->tm_min);
   EXPECT_EQ(10, ptm->tm_sec);
+}
+
+/*!
+* We cant guess if uuid is valid or not, so function will try to process everything T_T
+*/
+TEST(uuidToTime, uninitializedUuidTest){
+  EXPECT_NO_THROW({
+    boost::uuids::uuid uuid;
+    ExtractTimeFromUUID(uuid);
+  });
 }
