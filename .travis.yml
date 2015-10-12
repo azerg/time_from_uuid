@@ -30,4 +30,20 @@ script:
   - cd build
   - make
   - ./uuidTest
+  
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "TH9bFhgiGN5ojv9NPNmqLBTMN673pRw9+2riKklpbBUDjkWEiwKml6irzQqydwqotvii+9+idTMyd8z0gzqUxRhQOpaBVxSJRIkirmhuNwxXT/I6K/ByN0S9ma6uzifxpg/oRMJh0GXIJ/t44FKeDUjpJsBEjVnunaUHn66PlFoxVS3S1BLkOhzg0C0yQzFHfN8Q3Yi49+V9o2jLjZYwWMjne69ZNP/UpXsE8Ez4VBFHQrktPvyYsOnbxVvGy679J5QV1JHvukefuG114nu5R2xodPUenmbg4z/0+css/P7Q4dbn0LwxRhd3TwRFNt7OyK99AHtjFf5Eyy3pzYhknVN/7FEl9XwzmtOPqwHNG6WHnvln6Z7ZBladmTM8KC6qhmtW95G090Yh0BlwmbzYsKSVCSijK8ADrnFebRCgUgqGJo73sXYqIyx9dO3gf5auQA9twvWktPbtCh19vG/1j7BaSr/yxVgR2rQhs9xfh1inin8Q7C5pTB68Q+BJJ8NmUDti39/UZj+7Zn9H9uNw1rHzFIFjGCijgE897xD4F5WtOY28nx3LxWPu1ah0Hw07/b0DTGxnXu+pcelq6yg3YkZt17AM8BCTUwQxDBQvYmyj+IHNJlex21HrPdmalap+DQomuhmv00ijD+hS2JpSHe7ZboxGFBD7GWDlJyEgxyk="
+
+addons:
+  coverity_scan:
+    project:
+      name: "azerg/time_from_uuid"
+      description: "Build submitted via Travis CI"
+    #notification_email: ...
+    build_command_prepend: "./configure; make clean"
+    build_command:   "make -j 4"
+    branch_pattern: coverity_scan
  
