@@ -9,6 +9,7 @@ message ("BOOST_ROOT: " ${BOOST_ROOT})
 set (test_executable_name uuidTest)
 
 project(${test_executable_name})
+enable_testing()
 
 add_executable(${test_executable_name} testMain.cpp uuidTest.cpp uuid_to_time.hpp)
 
@@ -28,7 +29,7 @@ if (WIN32)
 	
 	########################################################################
 	# replacing MD with MT, MDd with MTd
-    set(variables CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE)
+  set(variables CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE)
 	foreach(variable ${variables})
 		if(${variable} MATCHES "/MD")
 		  string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
@@ -49,3 +50,5 @@ else()
 	message ("---linking linux gtest libs")
 	target_link_libraries (${test_executable_name} ${GTEST_ROOT}/cmake/libgtest.so)
 endif()
+
+add_test(uuidTest ${test_executable_name})
