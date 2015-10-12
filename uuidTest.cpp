@@ -37,4 +37,5 @@ TEST(uuidToTime, uninitializedUuidTest){
     boost::uuids::uuid uuid;
     ExtractTimeFromUUID(uuid);
   });
+  SUCCEED();
 }
