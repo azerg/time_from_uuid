@@ -48,5 +48,4 @@ else()
 
 	message ("---linking linux gtest libs")
 	target_link_libraries (${test_executable_name} ${GTEST_ROOT}/cmake/libgtest.so)
-	target_link_libraries (${test_executable_name} ${URIPARSER_FOLDER}/deploy/lib/liburiparser.so)
 endif()
