@@ -20,8 +20,7 @@ TEST(uuidToTime, iexploreUuidTest){
 
   time_t rawtime = fileTimeToUnixTime(convertedTime);
 
-  auto tm = std::put_time(std::gmtime(&rawtime), "");
-  auto ptm = tm._Tptr;
+  auto ptm = std::gmtime(&rawtime);
   EXPECT_EQ(2015, ptm->tm_year + 1900);
   EXPECT_EQ(9, ptm->tm_mon + 1);
   EXPECT_EQ(11, ptm->tm_mday);

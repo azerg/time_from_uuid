@@ -7,6 +7,8 @@ environment:
   matrix:
      - GENERATOR: "Visual Studio 14"
        CONFIG: Debug
+     - GENERATOR: "Visual Studio 14"
+       CONFIG: Release       
        
 matrix:
   fast_finish: true
@@ -36,6 +38,3 @@ install:
 build_script:
   - cmake . -B"build" -G"Visual Studio 14" -Wno-dev -DBOOST_ROOT:STRING="%BOOST_ROOT%" -DGTEST_ROOT:STRING="%APPVEYOR_BUILD_FOLDER%\gtest-1.7.0"
   - cmake --build "build" --config %CONFIG%
-  
-test_script:
-  - C:\projects\time-from-uuid\build\%CONFIG%\uuidTest.exe
