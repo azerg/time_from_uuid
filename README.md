@@ -1,6 +1,7 @@
 # extract time from time-based boost::uuid in C++
 
 Simple solution to get time from time-based uuid. We have this feature in python's uuid bindings, but we dont have it in boost or any other.
+[![Coverity Scan](https://img.shields.io/coverity/scan/6647.svg?style=plastic)]()
 
 | Compiled    |   Status |
 | :------------ |:---------------:|
